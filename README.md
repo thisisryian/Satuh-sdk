@@ -56,28 +56,28 @@ satuh.authorize(this, new Satuh.DialogListener() {
                                 e.printStackTrace();
                             }
                          ...
-            }
-
-            @Override
-            public void onIOException(IOException e, Object state) {
-
-            }
-
-            @Override
-            public void onFileNotFoundException(FileNotFoundException e, Object state) {
-
-            }
-
-            @Override
-            public void onMalformedURLException(MalformedURLException e, Object state) {
-
-            }
-
-            @Override
-            public void onSatuhError(SatuhError e, Object state) {
-
-            }
-        });
+                            }
+                
+                            @Override
+                            public void onIOException(IOException e, Object state) {
+                
+                            }
+                
+                            @Override
+                            public void onFileNotFoundException(FileNotFoundException e, Object state) {
+                
+                            }
+                
+                            @Override
+                            public void onMalformedURLException(MalformedURLException e, Object state) {
+                
+                            }
+                
+                            @Override
+                            public void onSatuhError(SatuhError e, Object state) {
+                
+                            }
+                        });
                
              
             }
@@ -98,4 +98,9 @@ satuh.authorize(this, new Satuh.DialogListener() {
             }
         });
 ```
+## Logout
+```class
 
+  mAsyncRunner.logout(getApplicationContext());
+  
+```

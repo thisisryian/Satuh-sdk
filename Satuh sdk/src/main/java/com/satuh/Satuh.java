@@ -20,16 +20,16 @@ import java.net.MalformedURLException;
 public class Satuh {
 
     // Strings used in the authorization flow
-    public static final String REDIRECT_URI = "http://192.168.100.100:81/response";
+    public static final String REDIRECT_URI = "https://account.satuh.com/response";
     public static final String CANCEL_URI = "cancel";
 
     private String mAppId;
     private String mAccessToken = null;
     private DialogListener mAuthDialogListener;
     protected static String DIALOG_BASE_URL =
-            "http://192.168.100.100:81/oauth/authorize";
+            "https://account.satuh.com/oauth/authorize";
     protected static String API =
-            "http://192.168.100.100:81/api/user";
+            "https://account.satuh.com/api/user";
     public Satuh(String appId) {
         if (appId == null) {
             throw new IllegalArgumentException(
@@ -122,7 +122,6 @@ public class Satuh {
                     "Application requires permission to access the Internet");
         } else {
 //
-            Log.e("url"," "+url);
             new SatuhDialog(context, url, listener).show();
         }
     }
@@ -201,8 +200,8 @@ public class Satuh {
 
     public void logout(Context context)
             throws MalformedURLException, IOException {
-        Util.clearCookiesForDomain(context, "192.168.100.100:81");
-        Util.clearCookiesForDomain(context, "http://192.168.100.100:81");
+        Util.clearCookiesForDomain(context, "account.satuh.com");
+        Util.clearCookiesForDomain(context, "https://account.satuh.com/");
         AccessTokenCache a = new AccessTokenCache(context);
         a.clear();
         setAccessToken(null);
