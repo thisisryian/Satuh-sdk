@@ -15,7 +15,7 @@ allprojects {
 Add dependencies :
 ```gradle
 dependencies {
-     compile 'com.github.ericnataa:Satuh:0.0.2'
+     compile 'com.github.pmb:Satuh:0.0.2'
 }
 ```
 
