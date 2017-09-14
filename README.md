@@ -23,7 +23,7 @@ dependencies {
 ## Declare variable
 ```class
 
-Satuh satuh = new Satuh(#your client id);
+Satuh satuh = new Satuh(#your client id(ex:"3"),#your url(ex:"http://example.com"));
 AsyncSatuhRunner mAsyncRunner;
 
 

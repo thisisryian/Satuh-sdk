@@ -19,8 +19,9 @@ import java.net.MalformedURLException;
 
 public class Satuh {
 
+
     // Strings used in the authorization flow
-    public static final String REDIRECT_URI = "https://account.satuh.com/response";
+    public String REDIRECT_URI;
     public static final String CANCEL_URI = "cancel";
 
     private String mAppId;
@@ -30,12 +31,13 @@ public class Satuh {
             "https://account.satuh.com/oauth/authorize";
     protected static String API =
             "https://account.satuh.com/api/user";
-    public Satuh(String appId) {
-        if (appId == null) {
+    public Satuh(String appId, String uri) {
+        if (appId == null|| uri==null) {
             throw new IllegalArgumentException(
                     "You must specify your application ID when instantiating " +
                             "a Satuh object. See README for details.");
         }
+        REDIRECT_URI = uri;
         mAppId = appId;
     }
 
