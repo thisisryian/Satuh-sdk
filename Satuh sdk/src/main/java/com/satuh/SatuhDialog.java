@@ -3,9 +3,11 @@ package com.satuh;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,16 +25,12 @@ import android.widget.LinearLayout;
 
 public class SatuhDialog extends Dialog {
 
-    static final int FB_BLUE = 0xFF6D84B4;
-    static final float[] DIMENSIONS_DIFF_LANDSCAPE = {20, 60};
-    static final float[] DIMENSIONS_DIFF_PORTRAIT = {40, 60};
     static final FrameLayout.LayoutParams FILL =
             new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
                     ViewGroup.LayoutParams.FILL_PARENT);
     static final int MARGIN = 4;
     static final int PADDING = 2;
     static final String DISPLAY_STRING = "touch";
-    static final String FB_ICON = "icon.png";
     public static final String TOKEN = "access_token";
     private String mUrl;
     private Satuh.DialogListener mListener;
@@ -40,6 +38,7 @@ public class SatuhDialog extends Dialog {
     private ImageView mCrossImage;
     private WebView mWebView;
     private FrameLayout mContent;
+    public static final String USER_AGENT_FAKE = "Mozilla/5.0 (Linux; Android 4.1.1; Galaxy Nexus Build/JRO03C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19";
 
     public SatuhDialog(Context context, String url, Satuh.DialogListener listener) {
         super(context, android.R.style.Theme_Translucent_NoTitleBar);
@@ -99,8 +98,14 @@ public class SatuhDialog extends Dialog {
         mWebView = new WebView(getContext());
         mWebView.setVerticalScrollBarEnabled(false);
         mWebView.setHorizontalScrollBarEnabled(false);
-        mWebView.setWebViewClient(new SatuhDialog.FbWebViewClient());
+        mWebView.setWebViewClient(new StWebViewClient());
+        mWebView.getSettings().setUserAgentString(USER_AGENT_FAKE);
         mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setDisplayZoomControls(false);
+        mWebView.getSettings().setLoadWithOverviewMode(true);
+        mWebView.getSettings().setUseWideViewPort(true);
+        mWebView.getSettings().setDomStorageEnabled(true);
+
         mWebView.loadUrl(mUrl);
         mWebView.setLayoutParams(FILL);
         mWebView.setVisibility(View.INVISIBLE);
@@ -110,7 +115,7 @@ public class SatuhDialog extends Dialog {
         mContent.addView(webViewContainer);
     }
 
-    private class FbWebViewClient extends WebViewClient {
+    private class StWebViewClient extends WebViewClient {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -173,6 +178,7 @@ public class SatuhDialog extends Dialog {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            Util.logd("Satuh-WebView", "Webview Finish URL: " + url);
             pDialog.dismiss();
             /*
              * Once webview is fully loaded, set the mContent background to be transparent
@@ -181,6 +187,12 @@ public class SatuhDialog extends Dialog {
             mContent.setBackgroundColor(Color.TRANSPARENT);
             mWebView.setVisibility(View.VISIBLE);
             mCrossImage.setVisibility(View.VISIBLE);
+//            if (url.startsWith("https://accounts.google.com/")) {
+//                Bundle values = Util.parseUrl(url);
+//
+//
+//                SatuhDialog.this.dismiss();
+//            }
         }
     }
 }
