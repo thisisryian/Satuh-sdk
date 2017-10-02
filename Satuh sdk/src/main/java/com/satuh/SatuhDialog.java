@@ -38,7 +38,6 @@ public class SatuhDialog extends Dialog {
     private ImageView mCrossImage;
     private WebView mWebView;
     private FrameLayout mContent;
-    public static final String USER_AGENT_FAKE = "Mozilla/5.0 (Linux; Android 4.1.1; Galaxy Nexus Build/JRO03C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19";
 
     public SatuhDialog(Context context, String url, Satuh.DialogListener listener) {
         super(context, android.R.style.Theme_Translucent_NoTitleBar);
@@ -49,11 +48,10 @@ public class SatuhDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pDialog = new ProgressDialog(getContext());
-        pDialog.setMessage("Loading...");
+        pDialog = new ProgressDialog(getContext(),ProgressDialog.THEME_HOLO_DARK);
+        pDialog.setMessage(getContext().getResources().getString(R.string.loading));
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(true);
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         mContent = new FrameLayout(getContext());
 
@@ -95,11 +93,11 @@ public class SatuhDialog extends Dialog {
 
     private void setUpWebView(int margin) {
         LinearLayout webViewContainer = new LinearLayout(getContext());
+        webViewContainer.setBackgroundColor(Color.parseColor("#66000000"));
         mWebView = new WebView(getContext());
         mWebView.setVerticalScrollBarEnabled(false);
         mWebView.setHorizontalScrollBarEnabled(false);
         mWebView.setWebViewClient(new StWebViewClient());
-        mWebView.getSettings().setUserAgentString(USER_AGENT_FAKE);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setDisplayZoomControls(false);
         mWebView.getSettings().setLoadWithOverviewMode(true);

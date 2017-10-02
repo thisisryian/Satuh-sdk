@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
@@ -24,7 +25,7 @@ import java.net.URLEncoder;
 
 public final class Util {
 
-    private static boolean ENABLE_LOG = false;
+    private static boolean ENABLE_LOG = true;
 
     public static String encodeUrl(Bundle parameters) {
         if (parameters == null) {
