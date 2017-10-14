@@ -48,10 +48,10 @@ public class SatuhDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pDialog = new ProgressDialog(getContext(),ProgressDialog.THEME_HOLO_DARK);
+        pDialog = new ProgressDialog(getContext(),ProgressDialog.THEME_HOLO_LIGHT);
         pDialog.setMessage(getContext().getResources().getString(R.string.loading));
         pDialog.setIndeterminate(false);
-        pDialog.setCancelable(true);
+        pDialog.setCancelable(false);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         mContent = new FrameLayout(getContext());
 

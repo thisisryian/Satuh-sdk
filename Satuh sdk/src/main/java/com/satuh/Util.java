@@ -25,7 +25,7 @@ import java.net.URLEncoder;
 
 public final class Util {
 
-    private static boolean ENABLE_LOG = true;
+    private static boolean ENABLE_LOG = false;
 
     public static String encodeUrl(Bundle parameters) {
         if (parameters == null) {
